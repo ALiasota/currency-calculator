@@ -1,7 +1,7 @@
-import { Component, DoCheck, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule, FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+
+
 
 
 
