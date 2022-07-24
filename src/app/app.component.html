@@ -1,28 +1,22 @@
 
-
-<header class="header">
+<header class="header">  
   <p class="h4">Currency Converter</p>    
-  <div class="form-cont">      
+  <div class="form-cont">    
         <input
         [(ngModel)]="input1"
         (ngModelChange)="onInputChange1($event)"
         type="number"
         min="0"    
         id="sum1"
-        class="form-control"
-        style="width: 90px; background-color: rgba(0,0,255,.1)"
-        name="sum1">
-        
-    <div class="form-group" style="margin-bottom: 0;">  
-      
+        class="form-control"        
+        name="sum1">        
+    <div class="form-group" style="margin-bottom: 0;">      
       <select
       (ngModelChange)="onSelectChange1($event)" [(ngModel)]="currency1"
           id="currency" 
-          class="form-control" 
-          style="width: 90px; background-color: rgba(0,0,255,.1)"
+          class="form-control"          
           required>
-        <option 
-        *ngFor="let state of states"       
+        <option *ngFor="let state of states"       
         [ngValue]="state.rate">{{state.cc}}</option>
       </select>
     </div>
@@ -32,29 +26,24 @@
         <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
       </svg>
     </div>
-        <input 
-        
+        <input        
         [(ngModel)]="input2"
         (ngModelChange)="onInputChange2($event)" 
         type="number"
         min="0"   
         id="sum1"
-        class="form-control"
-        style="width: 90px; background-color: rgba(0,0,255,.1)"
+        class="form-control"        
         name="sum2">
-                <div class="form-group">
-        
+        <div class="form-group">        
           <select
           (ngModelChange)="onSelectChange2($event)" [(ngModel)]="currency2"
           id="currency" 
-          class="form-control" 
-          style="width: 90px; background-color: rgba(0,0,255,.1)"
+          class="form-control"          
           required>
-        <option 
-        *ngFor="let state of states"       
-        [ngValue]="state.rate">{{state.cc}}</option>
-    </select>
-  </div>
-  
-  </div>    
+            <option *ngFor="let state of states"       
+            [ngValue]="state.rate">{{state.cc}}
+            </option>
+          </select>
+        </div>     
+  </div>   
 </header>

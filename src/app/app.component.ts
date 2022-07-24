@@ -14,16 +14,16 @@ export class AppComponent implements OnInit{
   currency2 = 1;
   form2: any; 
 
-constructor(    
-  private http: HttpClient,      
-    ) {}
+  constructor(    
+    private http: HttpClient,      
+      ) {}
 
   states = [{
     cc: 'GRN', 
     r030 : '',
     txt: "Гривня",
     rate: 1,    
-    exchangedate: ""
+    exchangedate: Date.now()
   },];
 
   firstValues = {
@@ -31,10 +31,7 @@ constructor(
     sum2: 1,
     currency1: 1,
     currency2: 1,     
-  }
-
-
-  
+  }  
   
   onInputChange1(e:number) {
     this.input2 = e * this.currency1 /this.currency2;
@@ -53,10 +50,15 @@ constructor(
     console.log(this.currency1, 'currency1');
     console.log(this.currency2, 'currency2');
   }
+
   onSelectChange1(e:number) {
     this.currency1 = e;
     if(this.currency1 !== 1) {
-      this.input2 = this.currency1 / this.currency2 * this.input1;
+      if(this.currency2 !== 1) {
+        this.input2 = this.currency2 / this.currency1 * this.input1;
+      } else{
+         this.input2 = this.currency1 / this.currency2 * this.input1;
+      }     
     } else {
       this.input2 = e * this.input1 / this.currency2; 
     }
@@ -70,6 +72,9 @@ constructor(
   onSelectChange2(e:number) {
     this.currency2 = e;
     if(this.currency2 !== 1) {
+      if(this.currency1 !== 1) {
+        this.input1 = this.currency1 / this.currency2 * this.input2;
+      }
       this.input1 = this.currency2 / this.currency1 * this.input2;
     } else{
       this.input1 = e * this.input2 / this.currency1;      
@@ -82,18 +87,15 @@ constructor(
   }
 
   ngOnInit() { 
-    this.search();
-   
+    this.getCurrencies();   
   }
-  search() {
+
+  getCurrencies() {
     this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
     .subscribe((response: any) => {     
       const states = response.filter((item: any) => item.cc === 'USD' || item.cc === 'EUR'
       )      
-      this.states = [...this.states, ...states];
-      console.log(this.states);
+      this.states = [...this.states, ...states];      
     })    
-  }
-
-  
+  }  
 }

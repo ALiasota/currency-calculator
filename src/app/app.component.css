@@ -1,7 +1,5 @@
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-
-
 .header{
     background-color: bisque;
     height: 100vh;
@@ -21,4 +19,9 @@
 .svg-cont {
     margin-top: 8px;   
     padding-right: 5px;
+}
+
+.form-control {
+    width: 90px; 
+    background-color: rgba(0,0,255,.1)
 }
