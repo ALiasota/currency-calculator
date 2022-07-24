@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AppComponent implements OnInit{
-  input1 = 1;
-  input2 = 1;
+  inputVar1 = 1;
+  inputVar2 = 1;
   currency1 = 1;
   currency2 = 1;
-  form2: any; 
+  
 
   constructor(    
     private http: HttpClient,      
@@ -24,73 +24,67 @@ export class AppComponent implements OnInit{
     txt: "Гривня",
     rate: 1,    
     exchangedate: Date.now()
-  },];
-
-  firstValues = {
-    sum1: 1,
-    sum2: 1,
-    currency1: 1,
-    currency2: 1,     
-  }  
+  },];  
   
-  onInputChange1(e:number) {
-    this.input2 = e * this.currency1 /this.currency2;
+  onInputChange1(e:number): void {
+    this.inputVar2 = e * this.currency1 /this.currency2;
     console.log('onInputChange1');
-    console.log(this.input1, 'inp1');
-    console.log(this.input2, 'inp2');
+    console.log(this.inputVar1, 'inp1');
+    console.log(this.inputVar2, 'inp2');
     console.log(this.currency1, 'currency1');
     console.log(this.currency2, 'currency2');
   }
 
-  onInputChange2(e:number) {
-    this.input1 = e * this.currency2 /  this.currency1;
+  onInputChange2(e:number): void {
+    this.inputVar1 = e * this.currency2 /  this.currency1;
     console.log('onInputChange2');
-    console.log(this.input1, 'inp1');
-    console.log(this.input2, 'inp2');
+    console.log(this.inputVar1, 'inp1');
+    console.log(this.inputVar2, 'inp2');
     console.log(this.currency1, 'currency1');
     console.log(this.currency2, 'currency2');
   }
 
-  onSelectChange1(e:number) {
+  onSelectChange1(e:number): void {
     this.currency1 = e;
     if(this.currency1 !== 1) {
       if(this.currency2 !== 1) {
-        this.input2 = this.currency2 / this.currency1 * this.input1;
+        this.inputVar2 = this.currency2 / this.currency1 * this.inputVar1;
       } else{
-         this.input2 = this.currency1 / this.currency2 * this.input1;
+         this.inputVar2 = this.currency1 / this.currency2 * this.inputVar1;
       }     
     } else {
-      this.input2 = e * this.input1 / this.currency2; 
+      this.inputVar2 = e * this.inputVar1 / this.currency2; 
     }
        
     console.log('onSelectChange1');
-    console.log(this.input1, 'inp1');
-    console.log(this.input2, 'inp2');
+    console.log(this.inputVar1, 'inp1');
+    console.log(this.inputVar2, 'inp2');
     console.log(this.currency1, 'currency1');
     console.log(this.currency2, 'currency2');
   }
-  onSelectChange2(e:number) {
+  onSelectChange2(e:number): void {
     this.currency2 = e;
     if(this.currency2 !== 1) {
       if(this.currency1 !== 1) {
-        this.input1 = this.currency1 / this.currency2 * this.input2;
+        this.inputVar1 = this.currency1 / this.currency2 * this.inputVar2;
       }
-      this.input1 = this.currency2 / this.currency1 * this.input2;
+      this.inputVar1 = this.currency2 / this.currency1 * this.inputVar2;
     } else{
-      this.input1 = e * this.input2 / this.currency1;      
+      this.inputVar1 = e * this.inputVar2 / this.currency1;      
     }
     console.log('onSelectChange2');
-      console.log(this.input1, 'inp1');
-      console.log(this.input2, 'inp2');
-      console.log(this.currency1, 'currency1');
-      console.log(this.currency2, 'currency2');
+    console.log(this.inputVar1, 'inp1');
+    console.log(this.inputVar2, 'inp2');
+    console.log(this.currency1, 'currency1');
+    console.log(this.currency2, 'currency2');
   }
 
-  ngOnInit() { 
+  
+  ngOnInit(): void { 
     this.getCurrencies();   
   }
 
-  getCurrencies() {
+  getCurrencies(): void {
     this.http.get('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
     .subscribe((response: any) => {     
       const states = response.filter((item: any) => item.cc === 'USD' || item.cc === 'EUR'
